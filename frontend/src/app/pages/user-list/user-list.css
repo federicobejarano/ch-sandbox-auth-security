@@ -1,0 +1,78 @@
+ion-toolbar {
+    --background: var(--ion-color-primary);
+    --color: white;
+}
+
+.user-list {
+    background: transparent;
+}
+
+.user-item {
+    --background: var(--ion-color-light);
+    --border-radius: 1rem;
+    --padding-start: 1rem;
+    --inner-padding-top: 0.875rem;
+    --inner-padding-bottom: 0.875rem;
+    --inner-padding-end: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.user-item:last-child {
+    margin-bottom: 0;
+}
+
+.user-name {
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+}
+
+.user-email {
+    margin-bottom: 0.35rem;
+    color: var(--ion-color-medium);
+}
+
+.user-meta {
+    display: block;
+    font-size: 0.85rem;
+}
+
+.membership-badge {
+    min-width: 6.5rem;
+    text-align: center;
+}
+
+.loading-container {
+    min-height: 12rem;
+    display: grid;
+    place-content: center;
+    gap: 0.75rem;
+    color: var(--ion-color-medium);
+}
+
+.loading-container ion-spinner {
+    width: 2rem;
+    height: 2rem;
+    margin-inline: auto;
+}
+
+.empty-state {
+    --background: var(--ion-color-light);
+    --border-radius: 1rem;
+    --padding-start: 1rem;
+    --inner-padding-end: 1rem;
+    --inner-padding-top: 1.25rem;
+    --inner-padding-bottom: 1.25rem;
+}
+
+.empty-state h2 {
+    margin-bottom: 0.4rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+}
+
+.empty-state p {
+    margin: 0;
+    color: var(--ion-color-medium);
+}

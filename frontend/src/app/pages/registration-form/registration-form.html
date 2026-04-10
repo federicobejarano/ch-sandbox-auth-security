@@ -1,0 +1,84 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Registrate!</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+        <!-- campo nombre -->
+        <ion-item>
+            <ion-input
+                formControlName="name"
+                label="Nombre"
+                labelPlacement="floating"
+                fill="outline"
+                type="text"
+                placeholder="Ingresá tu nombre"
+                [errorText]="getErrorText(nameCtrl, { required: 'El nombre es obligatorio', minlength: 'Mínimo 2 caracteres', serverError: nameCtrl.getError('serverError') ?? '' })"
+                [class.ion-invalid]="nameCtrl.invalid"
+                [class.ion-touched]="nameCtrl.touched"
+            ></ion-input>
+        </ion-item>
+
+        <!-- campo email -->
+        <ion-item>
+            <ion-input
+                formControlName="email"
+                label="Email"
+                labelPlacement="floating"
+                fill="outline"
+                type="text"
+                placeholder="tucorreo@ejemplo.com"
+                [errorText]="getErrorText(emailCtrl, { required: 'El email es obligatorio', email: 'Ingresá un email válido', serverError: emailCtrl.getError('serverError') ?? '' })"
+                [class.ion-invalid]="emailCtrl.invalid"
+                [class.ion-touched]="emailCtrl.touched"
+            ></ion-input>
+        </ion-item>
+
+        <!-- campo membershipType -->
+        <ion-item>
+            <ion-select
+                formControlName="membershipType"
+                label="Tipo de membresía"
+                labelPlacement="floating"
+                fill="outline"
+                interface="popover"
+                placeholder="Seleccioná una opción"
+                [errorText]="getErrorText(membershipTypeCtrl, { required: 'Seleccioná un tipo de membresía', serverError: membershipTypeCtrl.getError('serverError') ?? '' })"
+                [class.ion-invalid]="membershipTypeCtrl.invalid"
+                [class.ion-touched]="membershipTypeCtrl.touched"
+            >
+                <ion-select-option value="standard">Estándar</ion-select-option>
+                <ion-select-option value="premium">Premium</ion-select-option>
+                <ion-select-option value="honorary">Honorario</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <!-- botón de envío -->
+        <ion-button
+            type="submit"
+            expand="block"
+            [disabled]="registrationForm.invalid"
+        >Registrar</ion-button>
+
+    </form>
+
+    <!-- botón de navegación -->
+
+    <div class="navigation-section">
+
+        <!-- ruta absoluta para dirigir a Users -->
+        <ion-button
+                routerLink="/users"
+                expand="block"
+                fill="outline"
+                color="medium"
+        >
+            Ver Usuarios Registrados
+        </ion-button>
+    </div>
+
+</ion-content>

@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button ionRouterLink="/register" defaultHref="/register"></ion-back-button>
+        </ion-buttons>
+
+        <ion-title>Usuarios Registrados</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    @if (users$ | async; as users) {
+        <ion-list inset="true" class="user-list">
+            @for (user of users; track user.id) {
+                <ion-item class="user-item" lines="none">
+                    <ion-label>
+                        <h2 class="user-name">{{ user.name }}</h2>
+                        <p class="user-email">{{ user.email }}</p>
+                        <ion-note color="medium" class="user-meta">
+                            Registrado: {{ user.createdAt }}
+                        </ion-note>
+                    </ion-label>
+
+                    <ion-badge
+                        slot="end"
+                        class="membership-badge"
+                        [color]="membershipUiMap[user.membershipType]?.color ?? 'medium'"
+                    >
+                        {{ membershipUiMap[user.membershipType]?.label ?? user.membershipType }}
+                    </ion-badge>
+                </ion-item>
+            } @empty {
+                <ion-item class="empty-state" lines="none">
+                    <ion-label class="ion-text-center">
+                        <h2>Aún no hay usuarios registrados</h2>
+                        <p>Registrá uno desde el formulario para verificar el flujo end-to-end.</p>
+                    </ion-label>
+                </ion-item>
+            }
+        </ion-list>
+    } @else {
+        <div class="loading-container ion-text-center">
+            <ion-spinner name="crescent" color="primary"></ion-spinner>
+            <p class="ion-no-margin">Cargando usuarios...</p>
+        </div>
+    }
+</ion-content>
