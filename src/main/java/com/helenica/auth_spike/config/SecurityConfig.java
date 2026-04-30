@@ -2,8 +2,10 @@ package com.helenica.auth_spike.config;
 
 import com.helenica.auth_spike.security.AppUserDetailsService;
 import com.helenica.auth_spike.security.JwtAuthenticationFilter;
+import jakarta.servlet.DispatcherType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -18,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -90,6 +93,7 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 .authorizeHttpRequests(auth -> auth
+                        .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
@@ -97,6 +101,10 @@ public class SecurityConfig {
 
                 .headers(headers ->
                         headers.frameOptions(frame -> frame.sameOrigin()))
+
+                .exceptionHandling(exceptions ->
+                        exceptions.authenticationEntryPoint(
+                                new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
 
                 .authenticationProvider(authenticationProvider())
 

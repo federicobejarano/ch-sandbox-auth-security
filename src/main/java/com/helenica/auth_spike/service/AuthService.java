@@ -7,6 +7,7 @@ import com.helenica.auth_spike.entity.Role;
 import com.helenica.auth_spike.entity.User;
 import com.helenica.auth_spike.repository.UserRepository;
 import com.helenica.auth_spike.security.JwtService;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,6 +34,10 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest request) {
+        if (userRepository.findByEmail(request.email()).isPresent()) {
+            throw new DataIntegrityViolationException("Email already registered.");
+        }
+
         User user = new User(
                 request.name(),
                 request.email(),
