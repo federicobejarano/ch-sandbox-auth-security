@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Acceso denegado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="unauthorized-shell">
+    <ion-text>
+      <h2>No tenés permisos para acceder a esta ruta.</h2>
+      <p>
+        El guard dejó pasar la autenticación, pero bloqueó la navegación por mismatch de role.
+      </p>
+    </ion-text>
+
+    @if (isAuthenticated) {
+      <ion-button routerLink="/users" expand="block">
+        Volver a Users
+      </ion-button>
+    } @else {
+      <ion-button routerLink="/login" expand="block">
+        Ir a Login
+      </ion-button>
+    }
+  </div>
+</ion-content>

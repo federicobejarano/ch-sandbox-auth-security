@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Admin Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="dashboard-shell">
+    <section class="hero-card">
+      <h2>Acceso administrativo validado</h2>
+      <p class="ion-no-margin">
+        Esta ruta solo se habilita cuando el `authGuard` detecta la authority correcta en el JWT.
+      </p>
+      <ion-note color="medium">Role actual: {{ role ?? 'sin role' }}</ion-note>
+    </section>
+
+    <ion-list inset="true">
+      @if (users$ | async; as users) {
+        @for (user of users; track user.id) {
+          <ion-item>
+            <ion-label>
+              <h3>{{ user.email }}</h3>
+              <p>{{ user.role }}</p>
+            </ion-label>
+          </ion-item>
+        } @empty {
+          <ion-item>
+            <ion-label>No hay usuarios para mostrar.</ion-label>
+          </ion-item>
+        }
+      } @else {
+        <ion-item>
+          <ion-label>Cargando vista administrativa...</ion-label>
+        </ion-item>
+      }
+    </ion-list>
+
+    <div class="actions">
+      <ion-button routerLink="/users" expand="block" fill="outline">
+        Ir a Users
+      </ion-button>
+      <ion-button expand="block" color="danger" (click)="logout()">
+        Cerrar sesión
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

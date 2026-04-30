@@ -1,0 +1,11 @@
+ion-toolbar {
+  --background: var(--ion-color-primary);
+  --color: white;
+}
+
+.unauthorized-shell {
+  display: grid;
+  gap: 1rem;
+  max-width: 32rem;
+  margin-inline: auto;
+}
