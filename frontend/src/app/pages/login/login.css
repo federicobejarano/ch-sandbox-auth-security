@@ -1,0 +1,25 @@
+ion-toolbar {
+  --background: var(--ion-color-primary);
+  --color: white;
+}
+
+.auth-shell {
+  display: grid;
+  gap: 1rem;
+  max-width: 32rem;
+  margin-inline: auto;
+}
+
+ion-item {
+  margin-bottom: 1rem;
+}
+
+ion-button[type='submit'] {
+  margin-top: 1.5rem;
+}
+
+.support-copy {
+  display: block;
+  margin-top: 0.5rem;
+  text-align: center;
+}

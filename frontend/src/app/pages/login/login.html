@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="auth-shell">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-input
+          formControlName="email"
+          label="Email"
+          labelPlacement="floating"
+          fill="outline"
+          type="email"
+          placeholder="admin@helenica.local"
+          [errorText]="getErrorText(emailCtrl, { required: 'El email es obligatorio', email: 'Ingresá un email válido', serverError: emailCtrl.getError('serverError') ?? '' })"
+          [class.ion-invalid]="emailCtrl.invalid"
+          [class.ion-touched]="emailCtrl.touched"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          formControlName="password"
+          label="Password"
+          labelPlacement="floating"
+          fill="outline"
+          type="password"
+          placeholder="Ingresá tu password"
+          [errorText]="getErrorText(passwordCtrl, { required: 'El password es obligatorio', serverError: passwordCtrl.getError('serverError') ?? '' })"
+          [class.ion-invalid]="passwordCtrl.invalid"
+          [class.ion-touched]="passwordCtrl.touched"
+        ></ion-input>
+      </ion-item>
+
+      <ion-button type="submit" expand="block" [disabled]="loginForm.invalid || isSubmitting">
+        {{ isSubmitting ? 'Ingresando...' : 'Ingresar' }}
+      </ion-button>
+    </form>
+
+    <ion-text color="medium" class="support-copy">
+      <p class="ion-no-margin">
+        Si todavía no tenés cuenta, podés crear una desde el flujo de registro.
+      </p>
+    </ion-text>
+
+    <ion-button routerLink="/register" expand="block" fill="outline">
+      Ir a registro
+    </ion-button>
+  </div>
+</ion-content>
